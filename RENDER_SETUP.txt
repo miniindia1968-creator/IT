@@ -1,0 +1,31 @@
+RENDER DEPLOYMENT
+
+This version is designed for ONE Render Web Service (not a Static Site).
+It serves the public website and the voting/admin API together.
+
+GitHub repository root must contain:
+- package.json
+- server.js
+- render.yaml
+- public/index.html
+- public/admin.html
+- public/app.js
+- public/admin.js
+- public/style.css
+- public/auditorium.jpg
+
+Render:
+1. New -> Web Service (NOT Static Site).
+2. Connect this GitHub repository.
+3. Build Command: npm install
+4. Start Command: npm start
+5. Environment variable:
+   ADMIN_PASSWORD = your chosen Super Admin password
+6. Render will generate ADMIN_SECRET automatically from render.yaml.
+7. Persistent disk is configured at /var/data.
+
+After deploy:
+- User site: https://YOUR-SERVICE.onrender.com/
+- Admin: https://YOUR-SERVICE.onrender.com/admin.html
+
+Do not upload this ZIP itself to GitHub. Extract it and upload its contents so index.html is inside the public folder.
