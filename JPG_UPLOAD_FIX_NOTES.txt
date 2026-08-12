@@ -1,0 +1,13 @@
+ANANT VIJAY VOTING v3 - FIXED
+
+Changes:
+1. Opening auditorium image uses the supplied Anant Vijay JPG.
+2. "Choose the next movie" hero heading is smaller.
+3. JPG/JPEG upload validation no longer depends on the browser MIME type.
+4. Server verifies the uploaded file is a real JPEG.
+5. Upload remains limited to 5 MB.
+6. Existing voting/admin functionality is retained.
+
+IMPORTANT:
+After uploading/replacing the project on Render, redeploy the service.
+The currently running Render service may still be using the older server code.
