@@ -1,0 +1,47 @@
+ANANT VIJAY VOTING v6 — FREE RENDER + SUPABASE PERSISTENT STORAGE
+
+This version is designed for Render Free. It does NOT require a paid Render
+Persistent Disk. Movie data, votes, voting status, and uploaded JPG poster
+URLs are stored in Supabase. JPG files are stored in a Supabase Storage bucket.
+
+RENDER ENVIRONMENT VARIABLES
+1. ADMIN_PASSWORD = your private Super Admin password
+2. ADMIN_SECRET = a long random secret string
+3. SUPABASE_URL = https://YOUR-PROJECT.supabase.co
+4. SUPABASE_SERVICE_ROLE_KEY = your Supabase service_role key
+5. SUPABASE_BUCKET = posters
+
+SUPABASE ONE-TIME SETUP
+1. Create a free Supabase project.
+2. Open SQL Editor and run:
+
+create table if not exists public.site_data (
+  id bigint primary key,
+  data jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+insert into public.site_data (id, data)
+values (1, '{"movies":[],"votes":{},"votingOpen":true,"weekLabel":"Next Week"}'::jsonb)
+on conflict (id) do nothing;
+
+3. Open Storage -> New bucket.
+4. Bucket name: posters
+5. Make the bucket PUBLIC so poster URLs can be displayed on the website.
+6. In Supabase Project Settings -> API, copy the Project URL and the
+   service_role key. Put them into Render Environment Variables above.
+
+IMPORTANT SECURITY
+- Never put SUPABASE_SERVICE_ROLE_KEY in frontend JavaScript or HTML.
+- Keep it only in Render Environment Variables.
+- The website server uses the key to write data and posters.
+
+RENDER
+Build command: npm install
+Start command: npm start
+Plan: Free
+No Render Persistent Disk is required.
+
+After setting the variables, redeploy. Then login to Super Admin and upload
+one JPG. The returned poster URL is a Supabase Storage URL, so it remains
+available even when Render spins down or redeploys.
