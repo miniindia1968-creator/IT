@@ -1,0 +1,23 @@
+JPG UPLOAD FIX - v5
+
+The upload was failing after the browser selected the JPG because the server
+was receiving no multipart file part. This version avoids that problem.
+
+Changes:
+- Super Admin reads the selected JPG with FileReader.
+- Browser sends the JPG as JSON/base64 to /api/upload-poster.
+- Server validates JPG/JPEG extension, 5 MB size, and JPEG magic bytes.
+- Server saves the image under public/uploads and returns its URL.
+- Multipart upload remains supported as a fallback.
+- No image URL is required in the Super Admin page.
+
+Important for Render:
+After replacing the deployed project, redeploy it and make sure the service
+starts with `npm start`. Existing environment variables ADMIN_PASSWORD and
+ADMIN_SECRET should remain configured.
+
+
+PERMANENCE FIX - v9.1
+- Uploaded posters are now saved under DATA_DIR/uploads, not public/uploads.
+- /uploads/* is served directly from that persistent directory.
+- On Render, DATA_DIR must point to a mounted Persistent Disk (normally /var/data) for posters to survive restarts/redeploys.

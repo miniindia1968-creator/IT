@@ -1,0 +1,13 @@
+ANANT VIJAY VOTING V2 — RENDER SETUP
+
+1. Create a Render Web Service from this folder/repository.
+2. Build command: npm install
+3. Start command: npm start
+4. Environment variables:
+   ADMIN_PASSWORD = your private admin password
+   ADMIN_SECRET = a long random secret string
+   DATA_DIR = /var/data   (REQUIRED for permanent posters/data)
+5. IMPORTANT: This version uploads JPG/JPEG as JSON/base64 and stores the actual poster file in the persistent DATA_DIR/uploads folder.
+6. The website and API are on the SAME Web Service, so the upload does not depend on a separate Netlify/Render function.
+7. IMPORTANT: This fixed version stores uploaded JPG posters in DATA_DIR/uploads instead of public/uploads. On Render, attach a Persistent Disk mounted at /var/data and set DATA_DIR=/var/data. This is required because the normal Render filesystem is ephemeral and can be reset on restart/redeploy. If your Render plan does not support a Persistent Disk, use an external object-storage solution instead; this ZIP does not claim the free ephemeral filesystem is permanent.
+8. No public voting results are shown on the user website; results are visible only to Super Admin.
